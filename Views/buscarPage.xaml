@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage Title="Buscar Perfil"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:Perfiles.ViewModels"
+    x:Class="Perfiles.Views.buscarPage">
+    <ContentPage.BindingContext>
+        <viewmodels:PerfilViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar
+                x:Name="BarraBusqueda"
+                MaxLength="200"  
+                Placeholder="Buscar palabra clave"
+                SearchCommand="{Binding SearchCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference BarraBusqueda}}"/>
+            <ScrollView VerticalScrollBarVisibility="Always">
+                <CollectionView ItemsSource="{Binding ResultadosBusqueda}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="{Binding AlturaFila}" />
+                                    <RowDefinition Height="{Binding AlturaFila}" />
+                                    <RowDefinition Height="{Binding AlturaFila}" /> 
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding Persona.Nombre}"
+                                       TextColor="Gray"
+                                       FontSize="Medium" />
+                                <Button Grid.Row="0" Grid.Column="1" Text="{Binding IconoBotonLista}"
+                                        TextColor="Gray"
+                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                        HorizontalOptions="Center" Command="{Binding ListButtonCommand}"
+                                        HeightRequest="30"
+                                        FontSize="Medium"
+                                        VerticalOptions="Start"
+                                        Padding="0,0,0,5"
+                                        BackgroundColor="White"/>
+                                <Label Grid.Row="1" Grid.Column="0" 
+                                       Text="{Binding Persona.Profesion}" FontSize="Small"
+                                       TextColor="Violet" IsVisible="{Binding CamposVisibles}"/>
+                                <Label Grid.Row="1" Grid.Column="1" 
+                                       Text="{Binding Persona.Telefono}" FontSize="Small"
+                                       TextColor="Violet" IsVisible="{Binding CamposVisibles}"/>
+                                <Label Grid.Row="2" Grid.Column="0" 
+                                       Text="{Binding ExperienciaLaboral}" FontSize="Small"
+                                       TextColor="Violet" IsVisible="{Binding CamposVisibles}"/>
+                                <Label Grid.Row="2" Grid.Column="1" 
+                                       Text="{Binding Edad}" FontSize="Small"
+                                       TextColor="Violet" IsVisible="{Binding CamposVisibles}"/>
+                                <Label Grid.Row="3" Grid.Column="0" 
+                                       Text="{Binding Persona.Ciudad}" FontSize="Small"
+                                       TextColor="Violet" IsVisible="{Binding CamposVisibles}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                            <Label VerticalTextAlignment="Start"
+                               HorizontalTextAlignment="Center"
+                               TextColor="DarkGray"
+                               FontSize="Large"
+                               Text="No hay resultados"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+
+                    <!--#region Datos de muestra-->
+                    <!--<CollectionView.EmptyView>
+                        <StackLayout>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="{Binding AlturaFila}" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Alejandro Gómez" FontSize="Medium" />
+                                <Button Grid.Row="0" Grid.Column="1" Text="{Binding IconoBotonLista}"
+                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                        HorizontalOptions="Center" Command="{Binding ListButtonCommand}"
+                                        HeightRequest="30"
+                                        FontSize="Medium"
+                                        VerticalOptions="Start"
+                                        Padding="0,0,0,5"
+                                        BackgroundColor="White"/>
+                                <Label Grid.Row="1" Grid.Column="0" 
+                                       Text="Ingeniero Electrónico" FontSize="Small"
+                                       TextColor="Violet" IsVisible="{Binding CamposVisibles}"/>
+                                <Label Grid.Row="1" Grid.Column="1" 
+                                       Text="3158128422" FontSize="Small"
+                                       TextColor="Violet" IsVisible="{Binding CamposVisibles}"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Sandra Meneses" FontSize="Medium" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="Administrador de empresas" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Row="1" Grid.Column="1"     Text="3204546127" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Carlos Forero" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Abogado" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3007862134" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Camila Castañeda" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Ingeniero Industrial" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3163312858" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Álvaro Valbuena" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Medico psiquiatra" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3123060551" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Zoraida Salazar" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Socióloga" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3069776502" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Alejandro Gómez" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Ingeniero Electrónico" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3158128422" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Sandra Meneses" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Administrador de empresas" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3204546127" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Carlos Forero" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Abogado" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3007862134" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Camila Castañeda" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Ingeniero Industrial" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3163312858" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Álvaro Valbuena" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Médico psiquiatra" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3123060551" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Zoraida Salazar" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Sociólogo" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3069776502" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                        </StackLayout>
+                    </CollectionView.EmptyView>-->
+                    <!--#endregion-->
+                    
+                </CollectionView>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

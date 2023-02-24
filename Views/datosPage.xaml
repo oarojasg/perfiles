@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage Title="Añadir Perfil"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:Perfiles.ViewModels"
+    x:Class="Perfiles.Views.datosPage">
+    <!--x:DataType="viewmodels:PerfilViewModel">-->
+    <ContentPage.BindingContext>
+        <viewmodels:PerfilViewModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <!--#region Campos de entrada-->
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!--#region Nombre-->
+            <Label
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Nombre"
+                TextColor="Gray"/>  
+            <Entry
+                MaxLength="200"
+                ClearButtonVisibility="WhileEditing"
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Placeholder="Escribe nombre aquí"
+                PlaceholderColor="DarkGray"
+                Text="{Binding NombreEntrada}"
+                TextColor="Black"
+                BackgroundColor="WhiteSmoke"/>
+            <!--#endregion-->
+            <!--#region Teléfono-->
+            <Label
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Teléfono"
+                TextColor="Gray" />
+            <Entry
+                MaxLength="11"
+                Keyboard="Telephone"
+                ClearButtonVisibility="WhileEditing"
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Placeholder="Escribe teléfono aquí"
+                PlaceholderColor="DarkGray"
+                Text="{Binding TelefonoEntrada}"
+                TextColor="Black"
+                BackgroundColor="WhiteSmoke"/>
+            <!--#endregion-->
+            <!--#region Profesión-->
+            <Label
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Profesión" 
+                TextColor="Gray"/>
+            <Entry
+                MaxLength="100"
+                ClearButtonVisibility="WhileEditing"
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Placeholder="Escribe profesión aquí"
+                PlaceholderColor="DarkGray"
+                Text="{Binding ProfesionEntrada}"
+                TextColor="Black"
+                BackgroundColor="WhiteSmoke"/>
+            <!--#endregion-->
+            <!--#region Experiencia laboral-->
+            <Label
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Experiencia" 
+                TextColor="Gray"/>
+            <Entry
+                MaxLength="2"
+                Keyboard="Numeric"
+                ClearButtonVisibility="WhileEditing"
+                Grid.Row="3"
+                Grid.Column="1"
+                Placeholder="Años"
+                PlaceholderColor="DarkGray"
+                Text="{Binding ExperienciaAnosEntrada}"
+                TextColor="Black"
+                BackgroundColor="WhiteSmoke"/>
+            <Entry
+                MaxLength="2"
+                Keyboard="Numeric"
+                ClearButtonVisibility="WhileEditing"
+                Grid.Row="3"
+                Grid.Column="2"
+                Placeholder="Meses"
+                PlaceholderColor="DarkGray"
+                Text="{Binding ExperienciaMesesEntrada}"
+                TextColor="Black"
+                BackgroundColor="WhiteSmoke"/>
+            <!--#endregion-->
+            <!--#region Ciudad-->
+            <Label
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Ciudad" 
+                TextColor="Gray"/>
+            <Entry
+                MaxLength="100"
+                ClearButtonVisibility="WhileEditing"
+                Grid.Row="4"
+                Grid.Column="1"
+                Grid.ColumnSpan="2" 
+                Placeholder="Escribe ciudad aquí"
+                PlaceholderColor="DarkGray"
+                Text="{Binding CiudadEntrada}"
+                TextColor="Black"
+                BackgroundColor="WhiteSmoke"/>
+            <!--#endregion-->
+            <!--#region Edad-->
+            <Label
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Edad" 
+                TextColor="Gray"/>
+            <Entry
+                ClearButtonVisibility="WhileEditing"
+                Grid.Row="5"
+                Grid.Column="1"
+                Placeholder="Años"
+                PlaceholderColor="DarkGray" 
+                Text="{Binding EdadEntrada}"
+                TextColor="Black"
+                BackgroundColor="WhiteSmoke"/>
+            <!--#endregion-->
+            <Button
+                Grid.Row="5"
+                Grid.Column="2"
+                Text="Agregar"
+                Command="{Binding GuardarPerfil}"/>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Grilla de resultados-->
+        <Grid Grid.Row="1">
+            <ScrollView VerticalScrollBarVisibility="Always">
+                <CollectionView ItemsSource="{Binding PerfilesGuardados}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Nombre}" FontSize="Medium" HorizontalTextAlignment="Start"/>
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Profesion}" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Telefono}" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                            <Label VerticalTextAlignment="Start"
+                               HorizontalTextAlignment="Center"
+                               TextColor="DarkGray"
+                               FontSize="Large"
+                               Text="No hay perfiles añadidos"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+
+                    <!--#region Datos de muestra-->
+                    <!--<CollectionView.EmptyView>
+                        <StackLayout>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Alejandro Gómez" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Ingeniero Electrónico" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3158128422" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Sandra Meneses" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Administrador de empresas" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3204546127" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Carlos Forero" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Abogado" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3007862134" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Camila Castañeda" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Ingeniero Industrial" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3163312858" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Álvaro Valbuena" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Medico psiquiatra" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3123060551" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Zoraida Salazar" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Socióloga" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3069776502" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Alejandro Gómez" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Ingeniero Electrónico" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3158128422" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Sandra Meneses" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Administrador de empresas" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3204546127" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Carlos Forero" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Abogado" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3007862134" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Camila Castañeda" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Ingeniero Industrial" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3163312858" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Álvaro Valbuena" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Medico psiquiatra" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3123060551" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                            <Grid>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Zoraida Salazar" FontSize="Medium" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="Socióloga" FontSize="Small" TextColor="Violet" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="3069776502" FontSize="Small" TextColor="Violet" />
+                            </Grid>
+                        </StackLayout>
+                    </CollectionView.EmptyView>-->
+                    <!--#endregion-->
+
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+        <!--#endregion-->
+    </Grid>
+    
+</ContentPage>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Perfiles.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeBrands">
+              <On Platform="Android" 
+                  Value="Font Awesome 6 Brands-Regular-400.otf#Regular" />
+              <On Platform="iOS" 
+                  Value="FontAwesome5Brands-Regular" />
+            </OnPlatform> 
+    
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeSolid"> 
+              <On Platform="Android" 
+                  Value="Font Awesome 6 Free-Solid-900.otf#Regular" /> 
+              <On Platform="iOS" 
+                  Value="FontAwesome5Free-Solid" />  
+            </OnPlatform> 
+    
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeRegular">
+              <On Platform="Android" 
+                  Value="Font Awesome 6 Free-Regular-400.otf#Regular" /> 
+              <On Platform="iOS" 
+                  Value="FontAwesome5Free-Regular" /> 
+            </OnPlatform>    
+        </ResourceDictionary>
+          
+    </Application.Resources>
+</Application>
